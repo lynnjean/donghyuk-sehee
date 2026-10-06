@@ -1,0 +1,1099 @@
+/* =========================================================
+   강동혁 ♥ 김세희 모바일 청첩장
+   컨셉 : 깔끔 + 포근 / 여백 / White · Beige(#ECE8E9) · Pink(#EE5784)
+   ========================================================= */
+
+/* ---------------------------------------------------------
+   Dr (Production Type) — 유료 / 라틴 전용 폰트.
+   fonts/ 폴더에 Dr-Regular.woff2 를 넣으면 자동 적용됩니다.
+   파일이 없으면 아래 폴백(DM Sans → Gowun Dodum)으로 표시됩니다.
+   --------------------------------------------------------- */
+@font-face{
+  font-family:'Dr';
+  src:url('fonts/Dr-Regular.woff2') format('woff2'),
+      url('fonts/Dr-Regular.woff')  format('woff'),
+      url('fonts/Dr-Regular.otf')   format('opentype'),
+      url('fonts/Dr-Regular.ttf')   format('truetype');
+  font-weight:400;
+  font-style:normal;
+  font-display:swap;
+}
+
+:root{
+  --white:#FFFFFF;
+  --beige:#ECE8E9;
+  --beige-dp:#E2DCDD;
+  --pink:#EE5784;
+  --pink-sb:#F6A8BF;
+  --pink-tint:#FDEFF3;
+  --ink:#2E2A2B;
+  --ink-2:#6E6567;
+  --ink-3:#A79FA1;
+
+  --font-kr:'Gowun Batang', serif;
+  --font-kr-sans:'Gowun Dodum', sans-serif;
+  --font-en:'Cormorant Garamond', serif;
+  --font-script:'Parisienne', cursive;
+  /* 작은 글씨 전용 — Dr 는 한글이 없으므로 한글은 Gowun Dodum 으로 떨어집니다 */
+  --font-sm:'Dr', 'DM Sans', 'Gowun Dodum', sans-serif;
+
+  --pad:28px;
+  --radius:4px;
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+
+*,*::before,*::after{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+body{
+  margin:0;
+  background:var(--beige-dp);
+  color:var(--ink);
+  font-family:var(--font-kr);
+  line-height:1.75;
+  letter-spacing:-.01em;
+  -webkit-font-smoothing:antialiased;
+}
+img{display:block;max-width:100%;}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;}
+a{color:inherit;text-decoration:none;}
+ul,ol,dl,dd{margin:0;padding:0;list-style:none;}
+h1,h2,p,figure{margin:0;}
+.hidden{display:none !important;}
+[hidden]{display:none !important;}
+.muted{color:var(--ink-3);font-size:13px;}
+
+/* ---------- 레이아웃 ---------- */
+.wrap{
+  max-width:460px;
+  margin:0 auto;
+  background:var(--white);
+  overflow:hidden;
+  box-shadow:0 0 60px rgba(0,0,0,.07);
+}
+
+.sec{
+  padding:86px var(--pad);
+  text-align:center;
+  position:relative;
+}
+.sec--invite{background:var(--white);}
+.sec--date{background:var(--white);}
+.sec--gallery{background:var(--white);padding-bottom:70px;}
+.sec--map{background:var(--beige);}
+.sec--account{background:var(--white);}
+.sec--guest{background:var(--pink-tint);}
+
+.sec__eyebrow{
+  font-family:var(--font-sm);
+  font-size:12px;
+  letter-spacing:.42em;
+  color:var(--pink);
+  margin-bottom:16px;
+  text-indent:.42em;
+}
+.sec__title{
+  font-size:19px;
+  font-weight:400;
+  letter-spacing:-.02em;
+  margin-bottom:30px;
+}
+.sec__desc{
+  font-size:14.5px;
+  color:var(--ink-2);
+  line-height:2;
+  margin-bottom:34px;
+}
+
+/* 등장 애니메이션 */
+.reveal{
+  opacity:0;
+  transform:translateY(22px);
+  transition:opacity .9s var(--ease), transform .9s var(--ease);
+}
+.reveal.on{opacity:1;transform:none;}
+@media (prefers-reduced-motion:reduce){
+  .reveal{opacity:1;transform:none;transition:none;}
+}
+
+/* =========================================================
+   1. HERO
+   ========================================================= */
+.hero{position:relative;background:var(--white);}
+.hero__photo{
+  position:relative;
+  height:min(118vw, 560px);
+  overflow:hidden;
+  background:var(--beige);
+}
+.hero__photo img{
+  width:100%;height:100%;
+  object-fit:cover;
+  filter:grayscale(.55) contrast(1.02) brightness(1.02);
+  animation:heroZoom 14s var(--ease) forwards;
+}
+@keyframes heroZoom{from{transform:scale(1.1);}to{transform:scale(1);}}
+.hero__veil{
+  position:absolute;inset:0;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.55) 0%, rgba(255,255,255,0) 32%),
+    linear-gradient(0deg, rgba(236,232,233,.85) 0%, rgba(236,232,233,0) 45%);
+}
+
+.hero__quote{
+  position:absolute;top:34px;left:26px;
+  font-family:var(--font-sm);
+  font-size:11px;letter-spacing:.14em;line-height:1.85;
+  color:var(--pink);
+  text-align:left;
+  transition-delay:.25s;
+}
+.hero__date-en{
+  position:absolute;top:126px;right:26px;
+  font-family:var(--font-sm);
+  font-size:11px;letter-spacing:.24em;
+  color:var(--ink-2);
+  transition-delay:.35s;
+}
+
+.hero__names{
+  position:absolute;left:24px;bottom:52px;
+  font-family:var(--font-script);
+  font-weight:400;
+  font-size:clamp(44px, 14.5vw, 64px);
+  line-height:.96;
+  color:var(--pink);
+  text-align:left;
+  text-shadow:0 2px 18px rgba(255,255,255,.4);
+  transition-delay:.45s;
+}
+.hero__names span{display:block;}
+.hero__names .amp{
+  display:inline-block;
+  margin-left:4px;
+  font-size:.62em;
+  opacity:.85;
+}
+.hero__sub{
+  position:absolute;right:26px;top:46%;
+  font-family:var(--font-sm);
+  font-size:11px;letter-spacing:.3em;
+  color:var(--ink-2);
+  text-align:right;
+  transition-delay:.6s;
+}
+
+/* 손그림 데코 */
+.doodle{
+  position:absolute;
+  fill:none;
+  stroke:var(--pink);
+  stroke-width:2.4;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  opacity:.9;
+}
+.doodle--ring{top:72px;right:18px;width:76px;transform:rotate(-8deg);}
+.doodle--star{top:57%;right:34px;width:38px;fill:var(--pink);stroke:none;opacity:.85;}
+.doodle--heart{top:34%;left:30px;width:30px;}
+
+.hero__info{
+  padding:40px var(--pad) 22px;
+  text-align:center;
+}
+.hero__kr{
+  font-size:21px;letter-spacing:.06em;
+}
+.hero__kr em{
+  font-style:normal;color:var(--pink);margin:0 6px;
+}
+.hero__meta{
+  margin-top:14px;
+  font-size:14px;line-height:2;color:var(--ink-2);
+}
+
+.scroll-hint{
+  display:block;
+  width:1px;height:46px;
+  margin:6px auto 0;
+  background:linear-gradient(var(--pink-sb), transparent);
+  animation:hint 2.2s infinite;
+}
+@keyframes hint{
+  0%{transform:scaleY(0);transform-origin:top;opacity:0;}
+  40%{transform:scaleY(1);transform-origin:top;opacity:1;}
+  70%{transform:scaleY(1);transform-origin:bottom;opacity:1;}
+  100%{transform:scaleY(0);transform-origin:bottom;opacity:0;}
+}
+
+/* =========================================================
+   1-c. HERO — 레퍼런스 2 (마커 손글씨 포스터)
+   ========================================================= */
+.hero__board{
+  position:relative;
+  padding:9% 7% 13%;
+  background:var(--beige);
+  text-align:center;
+  overflow:hidden;
+}
+
+/* 큰 마커 손글씨 이름 */
+.hero__hand{
+  position:relative;
+  z-index:2;
+  margin:0 0 -7.5%;
+  font-family:'Caveat Brush', cursive;
+  font-weight:400;
+  font-size:clamp(48px, 15.6vw, 72px);
+  line-height:.86;
+  letter-spacing:-.005em;
+  color:var(--pink);
+  text-align:left;
+}
+.hero__hand span{display:block;}
+.hero__hand span:first-child{transform:rotate(-1.5deg);}
+.hero__hand span:last-child{
+  margin-left:14%;
+  transform:rotate(1deg);
+}
+
+/* 흑백 사진 */
+.hero__shot{
+  position:relative;
+  margin:0;
+  border-radius:10px;
+  overflow:hidden;
+  line-height:0;
+  transition-delay:.2s;
+}
+.hero__shot img{
+  width:100%;
+  aspect-ratio:4/3;
+  object-fit:cover;
+  filter:grayscale(1) contrast(1.06);
+}
+
+/* 사진 위 손그림 */
+.hd{
+  position:absolute;
+  fill:var(--pink);
+  stroke:none;
+}
+.hd--spark{top:11%;left:7%;width:13%;}
+.hd--star{top:30%;right:11%;width:11%;}
+.hd--swirl{
+  top:44%;right:7%;width:11%;
+  fill:none;
+  stroke:var(--pink);
+  stroke-width:6;
+  stroke-linecap:round;
+}
+.hd--swirl circle{fill:none;}
+
+/* 손글씨 본문 */
+.hero__note{
+  margin-top:7%;
+  font-family:'Gaegu', cursive;
+  font-weight:400;
+  font-size:clamp(17px, 4.8vw, 21px);
+  line-height:1.5;
+  color:var(--pink);
+  transition-delay:.3s;
+}
+
+/* 큰 손글씨 날짜 */
+.hero__big{
+  margin-top:5%;
+  font-family:'Caveat Brush', cursive;
+  font-size:clamp(34px, 10.5vw, 48px);
+  line-height:1.02;
+  color:var(--pink);
+  transition-delay:.4s;
+}
+
+.hero__where{
+  margin-top:5%;
+  font-family:'Gaegu', cursive;
+  font-weight:700;
+  font-size:clamp(14px, 4vw, 17px);
+  line-height:1.6;
+  color:var(--pink);
+  transition-delay:.5s;
+}
+
+/* =========================================================
+   1-d. HERO — 레퍼런스 1 (핑크 손글씨 포스터)
+   ========================================================= */
+.hero__poster{
+  position:relative;
+  height:min(137vw, 630px);
+  overflow:hidden;
+  background:var(--beige);
+  /* 타자기 문구용 — 시스템 모노로 웹폰트 추가 없이 */
+  --font-type:'Courier New', Courier, monospace;
+}
+.hero__bg{
+  width:100%;height:100%;
+  object-fit:cover;
+  filter:grayscale(1) contrast(1.1) brightness(1.02);
+  animation:posterZoom 16s var(--ease) forwards;
+}
+@keyframes posterZoom{from{transform:scale(1.08);}to{transform:scale(1);}}
+.hero__wash{
+  position:absolute;inset:0;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.4) 0%, rgba(255,255,255,0) 26%),
+    linear-gradient(0deg, rgba(255,255,255,.35) 0%, rgba(255,255,255,0) 42%);
+}
+
+/* 타자기 문구 */
+.hero__type{
+  position:absolute;top:3.5%;left:5%;
+  font-family:var(--font-type);
+  font-size:clamp(9.5px, 2.65vw, 12px);
+  line-height:1.95;
+  letter-spacing:.02em;
+  color:var(--pink);
+  text-align:left;
+  transition-delay:.2s;
+}
+/* 날짜 스탬프 */
+.hero__stamp{
+  position:absolute;top:19%;left:63%;
+  font-family:var(--font-type);
+  font-size:clamp(10px, 2.8vw, 13px);
+  letter-spacing:.3em;
+  color:var(--ink-2);
+  transform:rotate(-7deg);
+  transition-delay:.3s;
+}
+/* TWO LIVES / ONE LOVE */
+.hero__motto{
+  position:absolute;top:44%;right:7%;
+  font-family:var(--font-type);
+  font-size:clamp(10px, 2.8vw, 13px);
+  line-height:1.9;
+  letter-spacing:.12em;
+  color:var(--white);
+  text-align:right;
+  text-shadow:0 1px 6px rgba(0,0,0,.28);
+  transition-delay:.4s;
+}
+
+/* 큰 손글씨 이름 — 오른쪽으로 흘러넘치게 */
+.hero__script{
+  position:absolute;left:4%;bottom:2%;
+  margin:0;
+  font-family:'Pacifico', cursive;
+  font-weight:400;
+  font-size:clamp(48px, 16.5vw, 76px);
+  line-height:1.02;
+  letter-spacing:-.01em;
+  color:var(--pink);
+  text-align:left;
+  white-space:nowrap;
+  transition-delay:.5s;
+}
+.hero__script span{display:block;}
+.hero__script span:last-child{margin-left:3%;}
+
+/* ---- 손그림 낙서 ---- */
+.dd{
+  position:absolute;
+  fill:none;
+  stroke:var(--pink);
+  stroke-width:3;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.dd--ring  {top:6.5%;  left:78%;  width:15%;}
+.dd--heart1{top:27%;   left:26%;  width:6%;}
+.dd--heart2{top:32%;   left:33%;  width:4.5%;}
+.dd--curl  {top:27.5%; left:41%;  width:6.5%; stroke-width:3.4;}
+.dd--arrow {top:34%;   left:69%;  width:7%;}
+.dd--star1 {top:45%;   left:9%;   width:9%;}
+.dd--star2 {top:52%;   left:79%;  width:11%; fill:var(--pink); stroke:none;}
+.dd--cam   {top:62%;   left:78%;  width:16%;}
+.dd--sign  {
+  top:68%; left:60%; width:12%;
+  stroke:var(--white);
+  stroke-width:2.2;
+  filter:drop-shadow(0 1px 3px rgba(0,0,0,.25));
+}
+
+@media (max-width:360px){
+  .hero__poster{height:min(142vw, 560px);}
+}
+
+/* =========================================================
+   2. 초대글
+   ========================================================= */
+.invite__msg{
+  font-size:15.5px;
+  line-height:2.3;
+  color:var(--ink-2);
+  letter-spacing:-.015em;
+}
+.divider{margin:46px 0 38px;}
+.divider span{
+  display:block;width:40px;height:1px;
+  margin:0 auto;background:var(--pink-sb);
+  position:relative;
+}
+.divider span::before,.divider span::after{
+  content:'';position:absolute;top:-2px;
+  width:5px;height:5px;border-radius:50%;background:var(--pink-sb);
+}
+.divider span::before{left:-10px;}
+.divider span::after{right:-10px;}
+
+.parents li{
+  display:flex;align-items:baseline;justify-content:center;
+  gap:6px;
+  font-size:15.5px;
+  padding:7px 0;
+}
+.parents__name{color:var(--ink);}
+.parents__rel{font-size:13px;color:var(--ink-3);}
+.parents strong{font-weight:700;letter-spacing:.02em;}
+
+/* ---------- 버튼 ---------- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  height:48px;padding:0 30px;
+  border-radius:999px;
+  font-family:var(--font-kr-sans);
+  font-size:14px;letter-spacing:.02em;
+  transition:all .25s var(--ease);
+}
+.btn--line{
+  border:1px solid var(--pink-sb);
+  color:var(--pink);
+  background:var(--white);
+  margin-top:40px;
+}
+.btn--line:active{background:var(--pink);border-color:var(--pink);color:#fff;}
+.btn--solid{
+  background:var(--pink);color:#fff;width:100%;
+  box-shadow:0 6px 18px rgba(238,87,132,.22);
+}
+.btn--solid:active{transform:translateY(1px);}
+.btn--sm{height:40px;padding:0 20px;font-size:13px;margin-top:22px;}
+
+/* 버튼 안 아이콘 — 색은 버튼 글자색을 따라감(눌렀을 때 흰색으로 반전) */
+.btn__ico{
+  flex:none;
+  width:16px;height:16px;
+  margin-right:8px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:1.8;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.btn--app{
+  flex:1;height:44px;padding:0;
+  background:var(--white);
+  border:1px solid var(--beige-dp);
+  font-size:13px;color:var(--ink-2);
+}
+
+.chip{
+  flex:none;
+  height:28px;padding:0 12px;
+  border-radius:999px;
+  border:1px solid var(--pink-sb);
+  color:var(--pink);
+  background:var(--white);
+  font-family:var(--font-kr-sans);
+  font-size:12px;
+  line-height:26px;
+  transition:all .2s var(--ease);
+}
+.chip:active{background:var(--pink);color:#fff;}
+.chip.done{background:var(--pink);border-color:var(--pink);color:#fff;}
+
+/* =========================================================
+   3. 캘린더 & D-DAY
+   ========================================================= */
+.calendar{
+  padding:4px 6px 0;
+}
+.calendar__month{
+  font-family:var(--font-sm);
+  font-size:15px;letter-spacing:.24em;color:var(--ink-2);
+  margin-bottom:16px;
+}
+.calendar__month b{color:var(--pink);font-weight:500;}
+.calendar__table{width:100%;border-collapse:collapse;}
+.calendar__table th{
+  font-family:var(--font-sm);
+  font-size:12px;font-weight:500;letter-spacing:.1em;
+  color:var(--ink-3);
+  padding-bottom:12px;
+}
+.calendar__table th.sun{color:var(--pink);}
+.calendar__table th.sat{color:#7E96C4;}
+.calendar__table td{
+  font-family:var(--font-en);
+  font-size:16.5px;
+  font-weight:500;
+  font-variant-numeric:lining-nums;   /* 높이 균일한 숫자 */
+  font-feature-settings:'lnum' 1;
+  text-align:center;
+  padding:8px 0;
+  color:var(--ink);
+}
+.calendar__table td.sun{color:var(--pink);}
+.calendar__table td .d{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:30px;height:30px;border-radius:50%;
+}
+.calendar__table td.today .d{
+  background:var(--pink);color:#fff;
+  box-shadow:0 4px 12px rgba(238,87,132,.3);
+  position:relative;
+}
+.calendar__table td.today .d::after{
+  content:'';position:absolute;inset:-5px;
+  border:1px solid var(--pink-sb);border-radius:50%;
+  animation:pulse 2.4s infinite;
+}
+@keyframes pulse{
+  0%{transform:scale(.9);opacity:.9;}
+  70%{transform:scale(1.25);opacity:0;}
+  100%{opacity:0;}
+}
+
+/* ---------------------------------------------------------
+   [비교용] 월 표기 · 요일 줄까지 또렷하게
+   일자(숫자)는 이미 또렷 버전이 적용돼 있습니다.
+   아래 주석을 풀면 머리글까지 진해지고 요일 줄 아래 구분선이 생깁니다.
+   --------------------------------------------------------- */
+/*
+.calendar__month{
+  font-size:14px;
+  color:var(--ink);
+  margin-bottom:20px;
+}
+.calendar__table th{
+  font-size:11.5px;
+  color:var(--ink-2);
+  padding-bottom:13px;
+  border-bottom:1px solid rgba(167,159,161,.32);
+}
+.calendar__table tbody tr:first-child td{padding-top:15px;}
+*/
+
+.dday{margin-top:34px;}
+.dday__clock{
+  display:flex;justify-content:center;gap:8px;
+}
+.dday__clock li{
+  flex:1;max-width:76px;
+  background:var(--beige);
+  border-radius:var(--radius);
+  padding:14px 0 11px;
+}
+.dday__clock b{
+  display:block;
+  font-family:var(--font-en);
+  font-size:24px;font-weight:500;line-height:1;
+  color:var(--pink);
+  font-variant-numeric:tabular-nums;
+}
+.dday__clock span{
+  display:block;margin-top:7px;
+  font-family:var(--font-sm);
+  font-size:9.5px;letter-spacing:.18em;color:var(--ink-3);
+}
+.dday__msg{
+  margin-top:22px;
+  font-size:14.5px;color:var(--ink-2);
+}
+.dday__msg b{color:var(--pink);font-weight:400;}
+
+/* =========================================================
+   4. 갤러리 모자이크
+   ========================================================= */
+.mosaic{
+  /* 모자이크 실제 폭 — 타이포 크기·위치를 이 값에 비례시킨다 */
+  --gw:min(404px, calc(100vw - var(--pad) * 2));
+  position:relative;
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  gap:7px;
+  margin-top:10px;
+  padding:14px 0 70px;
+}
+.mosaic__item{
+  position:relative;
+  background:var(--beige);
+  cursor:pointer;
+}
+.mosaic__item img{
+  width:100%;height:100%;
+  object-fit:cover;
+  transition:filter .45s var(--ease), opacity .45s var(--ease);
+}
+.mosaic__item:active img{filter:brightness(.92);}
+.mosaic__no{
+  position:absolute;top:-17px;left:1px;
+  font-family:var(--font-sm);
+  font-size:10.5px;letter-spacing:.08em;
+  color:var(--pink);
+  background:var(--white);
+  padding:0 4px 1px;
+  z-index:3;
+}
+.mosaic__item.placeholder{
+  cursor:default;
+  background:
+    repeating-linear-gradient(45deg, var(--beige) 0 8px, #F3F0F1 8px 16px);
+}
+.mosaic__item.placeholder::after{
+  content:'PHOTO';
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-sm);
+  font-size:11px;letter-spacing:.2em;color:var(--ink-3);
+}
+
+/* 흩어진 배치 */
+.m1{grid-column:1/4;grid-row:1/4;aspect-ratio:2/3;}
+.m2{grid-column:4/7;grid-row:2/4;aspect-ratio:3/2;}
+.m3{grid-column:2/5;grid-row:4/7;aspect-ratio:2/3;}
+.m4{grid-column:5/7;grid-row:5/7;aspect-ratio:1/1;}
+.m5{grid-column:1/3;grid-row:7/9;aspect-ratio:1/1;}
+.m6{grid-column:3/6;grid-row:8/10;aspect-ratio:3/2;}
+
+/* ---- 여백을 채우는 웨딩 타이포 ---- */
+.gw{
+  position:absolute;
+  margin:0;
+  white-space:nowrap;
+  text-align:left;
+  pointer-events:none;
+  user-select:none;
+  z-index:1;
+}
+
+/* JUST / MARRIED — 우상단, 오른쪽으로 흘러넘치게 */
+.gw--just{
+  left:51%;top:3%;
+  font-family:'Archivo', sans-serif;
+  font-weight:800;
+  font-size:calc(var(--gw) * .101);
+  line-height:.95;
+  letter-spacing:-.025em;
+  color:var(--pink);
+}
+.gw--just span{display:block;}
+.gw--just span:last-child{margin-left:-.02em;}
+
+.gw--date{
+  left:51%;top:14.5%;
+  font-family:var(--font-sm);
+  font-size:calc(var(--gw) * .032);
+  letter-spacing:.26em;
+  color:var(--ink-3);
+}
+
+/* WEDDING DAY — 좌측 좁은 여백에 세로쓰기 */
+.gw--vert{
+  left:1.5%;top:37%;
+  writing-mode:vertical-rl;
+  font-family:'Archivo', sans-serif;
+  font-weight:700;
+  font-size:calc(var(--gw) * .026);
+  letter-spacing:.3em;
+  color:var(--pink-sb);
+}
+
+/* JEJU ISLAND WEDDING — m3 오른쪽 여백 */
+.gw--jeju{
+  left:69%;top:37.5%;
+  color:var(--pink);
+}
+.gw--jeju b{
+  display:block;
+  font-family:'Archivo', sans-serif;
+  font-weight:800;
+  font-size:calc(var(--gw) * .098);
+  line-height:.9;
+  letter-spacing:-.02em;
+}
+.gw--jeju span{
+  display:block;
+  margin-top:7px;
+  font-family:var(--font-sm);
+  font-size:calc(var(--gw) * .024);
+  letter-spacing:.22em;
+  color:var(--ink-3);
+}
+
+/* FOREVER & ALWAYS — 중단 가로 여백 (JUST MARRIED 와 동일 서체) */
+.gw--forever{
+  left:37.5%;top:69.5%;
+  font-family:'Archivo', sans-serif;
+  font-weight:800;
+  font-size:calc(var(--gw) * .056);
+  line-height:1;
+  letter-spacing:-.02em;
+  text-transform:uppercase;
+  color:var(--pink);
+}
+
+/* 좌하단 작은 메모 */
+.gw--note{
+  left:0;top:85%;
+  white-space:normal;
+  width:32%;
+  font-family:var(--font-sm);
+  font-size:calc(var(--gw) * .029);
+  letter-spacing:.06em;
+  line-height:1.7;
+  color:var(--ink-3);
+}
+
+.sq{
+  position:absolute;
+  width:10px;height:10px;
+  background:var(--pink);
+  opacity:.9;
+}
+.sq1{top:16.5%;left:92%;}
+.sq2{top:34%;left:2px;}
+.sq3{top:52%;right:6%;}
+.sq4{bottom:92px;left:46%;}
+.mosaic__caption{
+  position:absolute;right:2px;bottom:26px;
+  font-family:var(--font-sm);
+  font-size:12px;letter-spacing:.1em;line-height:1.7;
+  color:var(--ink-3);
+  text-align:right;
+}
+
+/* =========================================================
+   5. 오시는 길
+   ========================================================= */
+.map__place{font-size:17px;margin-bottom:8px;}
+.map__addr{
+  display:flex;align-items:center;justify-content:center;gap:9px;
+  flex-wrap:wrap;
+  font-size:14px;color:var(--ink-2);
+  margin-bottom:26px;
+}
+.map__embed{
+  border-radius:var(--radius);
+  overflow:hidden;
+  background:var(--white);
+  box-shadow:0 10px 30px rgba(46,42,43,.06);
+}
+.map__embed iframe{
+  display:block;width:100%;height:240px;border:0;filter:saturate(.9);
+}
+.map__apps{display:flex;gap:7px;margin-top:12px;}
+
+.way{margin-top:38px;text-align:left;}
+.way > div{
+  padding:18px 0;
+  border-top:1px solid rgba(167,159,161,.25);
+}
+.way > div:last-child{border-bottom:1px solid rgba(167,159,161,.25);}
+.way dt{
+  font-size:13px;letter-spacing:.04em;color:var(--pink);
+  margin-bottom:7px;
+  font-family:var(--font-kr-sans);
+}
+.way dd{font-size:14.5px;color:var(--ink-2);line-height:1.9;}
+
+/* =========================================================
+   6. 계좌 안내
+   ========================================================= */
+.acc{text-align:left;}
+.acc__group{
+  border-top:1px solid var(--beige-dp);
+}
+.acc__group:last-of-type{border-bottom:1px solid var(--beige-dp);}
+.acc__group summary{
+  position:relative;
+  list-style:none;
+  padding:20px 4px;
+  font-size:15px;
+  cursor:pointer;
+}
+.acc__group summary::-webkit-details-marker{display:none;}
+.acc__group summary::after{
+  content:'';position:absolute;right:8px;top:50%;
+  width:8px;height:8px;
+  border-right:1px solid var(--ink-3);
+  border-bottom:1px solid var(--ink-3);
+  transform:translateY(-70%) rotate(45deg);
+  transition:transform .3s var(--ease);
+}
+.acc__group[open] summary::after{transform:translateY(-20%) rotate(-135deg);}
+
+.acc__list{padding:0 0 18px;}
+.acc__list li{
+  background:var(--beige);
+  border-radius:var(--radius);
+  padding:15px 16px;
+  margin-bottom:8px;
+}
+.acc__who{font-size:13px;color:var(--ink-3);margin-bottom:5px;}
+.acc__who b{font-weight:400;color:var(--pink);margin-right:7px;}
+.acc__row{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+}
+.acc__num{
+  font-family:var(--font-kr-sans);
+  font-size:14.5px;letter-spacing:-.01em;
+  font-variant-numeric:tabular-nums;
+}
+
+/* =========================================================
+   7. 방명록
+   ========================================================= */
+.gb__form{text-align:left;}
+.gb__form input{margin-bottom:7px;}
+.gb__form input,.gb__form textarea{
+  width:100%;
+  font-family:var(--font-kr-sans);
+  font-size:14px;
+  color:var(--ink);
+  background:var(--white);
+  border:1px solid #F0DCE3;
+  border-radius:var(--radius);
+  padding:13px 14px;
+  outline:none;
+  transition:border-color .25s var(--ease);
+  -webkit-appearance:none;
+}
+.gb__form textarea{resize:none;line-height:1.7;}
+.gb__form input:focus,.gb__form textarea:focus{border-color:var(--pink-sb);}
+.gb__form input::placeholder,.gb__form textarea::placeholder{color:#C9BCC0;}
+.gb__form .btn--solid{margin-top:9px;}
+
+.gb__list{margin-top:26px;text-align:left;}
+.gb__list li{
+  position:relative;
+  background:var(--white);
+  border-radius:var(--radius);
+  padding:17px;
+  margin-bottom:9px;
+  box-shadow:0 4px 14px rgba(238,87,132,.06);
+  animation:pop .45s var(--ease);
+}
+@keyframes pop{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:none;}}
+.gb__head{
+  display:flex;align-items:baseline;gap:8px;margin-bottom:6px;
+}
+.gb__nm{font-size:14px;}
+.gb__dt{font-family:var(--font-sm);font-size:11px;letter-spacing:.06em;color:var(--ink-3);}
+.gb__tx{font-size:14px;line-height:1.85;color:var(--ink-2);white-space:pre-wrap;word-break:break-word;}
+.gb__empty{
+  text-align:center;color:var(--ink-3);font-size:13.5px;padding:26px 0;
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+.footer{
+  background:var(--ink);
+  color:#fff;
+  text-align:center;
+  padding:60px var(--pad) 54px;
+}
+.footer__names{
+  font-family:var(--font-en);
+  font-weight:300;
+  font-size:22px;
+  letter-spacing:.26em;
+  text-indent:.26em;   /* 자간 때문에 생기는 오른쪽 쏠림 보정 */
+  line-height:1.5;
+  color:var(--pink-sb);
+}
+.footer__names span{display:block;}
+.footer__heart{
+  display:block;
+  width:15px;height:14px;
+  margin:7px auto 6px;
+  fill:var(--pink);
+}
+.footer__date{
+  font-family:var(--font-sm);
+  font-size:12px;letter-spacing:.3em;
+  margin-top:8px;opacity:.6;
+}
+.footer__btns{margin-top:26px;}
+.footer .btn--line{
+  margin-top:0;background:transparent;border-color:rgba(255,255,255,.3);color:#fff;
+}
+.footer__copy{
+  margin-top:30px;
+  font-family:var(--font-sm);
+  font-size:11px;letter-spacing:.14em;opacity:.35;
+}
+
+/* =========================================================
+   BGM 버튼
+   ========================================================= */
+.bgm-btn{
+  position:fixed;top:16px;right:max(16px, calc(50vw - 230px + 16px));
+  z-index:60;
+  width:38px;height:38px;
+  border-radius:50%;
+  background:rgba(255,255,255,.82);
+  backdrop-filter:blur(6px);
+  box-shadow:0 2px 10px rgba(46,42,43,.12);
+  display:flex;align-items:center;justify-content:center;
+}
+.bgm-ico{display:flex;align-items:flex-end;gap:2px;height:13px;}
+.bgm-ico i{
+  display:block;width:2px;height:4px;
+  background:var(--pink);border-radius:1px;
+}
+.bgm-btn[aria-pressed="true"] .bgm-ico i{animation:eq .9s ease-in-out infinite;}
+.bgm-ico i:nth-child(2){animation-delay:.15s;}
+.bgm-ico i:nth-child(3){animation-delay:.3s;}
+.bgm-ico i:nth-child(4){animation-delay:.45s;}
+@keyframes eq{0%,100%{height:4px;}50%{height:13px;}}
+.bgm-btn[aria-pressed="false"] .bgm-ico{opacity:.4;}
+
+/* =========================================================
+   연락처 시트
+   ========================================================= */
+.sheet{position:fixed;inset:0;z-index:80;}
+.sheet__dim{
+  position:absolute;inset:0;
+  background:rgba(46,42,43,.42);
+  animation:fade .3s var(--ease);
+}
+@keyframes fade{from{opacity:0;}to{opacity:1;}}
+.sheet__panel{
+  position:absolute;left:50%;bottom:0;
+  transform:translateX(-50%);
+  width:100%;max-width:460px;
+  background:var(--white);
+  border-radius:18px 18px 0 0;
+  padding:30px var(--pad) calc(30px + env(safe-area-inset-bottom));
+  animation:up .38s var(--ease);
+}
+@keyframes up{from{transform:translate(-50%,100%);}to{transform:translate(-50%,0);}}
+.sheet__x{
+  position:absolute;top:14px;right:16px;
+  width:32px;height:32px;
+}
+.sheet__x::before,.sheet__x::after{
+  content:'';position:absolute;top:50%;left:9px;
+  width:14px;height:1px;background:var(--ink-2);
+}
+.sheet__x::before{transform:rotate(45deg);}
+.sheet__x::after{transform:rotate(-45deg);}
+.sheet__title{
+  font-size:16px;text-align:center;margin-bottom:22px;
+}
+
+.contact__side{
+  font-family:var(--font-en);
+  font-size:11px;letter-spacing:.24em;color:var(--pink);
+  padding:14px 2px 6px;
+}
+.contact ul li{
+  display:flex;align-items:center;gap:10px;
+  padding:12px 2px;
+  border-top:1px solid var(--beige);
+}
+.contact__rel{font-size:12px;color:var(--ink-3);width:34px;flex:none;}
+.contact__name{flex:1;font-size:15px;}
+.ic{
+  flex:none;
+  width:36px;height:36px;border-radius:50%;
+  background:var(--beige);
+  position:relative;
+  transition:background .2s var(--ease);
+}
+.ic:active{background:var(--pink-tint);}
+.ic--tel::before{
+  content:'';position:absolute;inset:0;
+  background:var(--pink);
+  -webkit-mask:center/15px no-repeat url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.2.4 2.4.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z'/%3E%3C/svg%3E");
+          mask:center/15px no-repeat url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.2.4 2.4.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z'/%3E%3C/svg%3E");
+}
+.ic--sms::before{
+  content:'';position:absolute;inset:0;
+  background:var(--ink-2);
+  -webkit-mask:center/15px no-repeat url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M20 2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h4l4 4 4-4h4a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2z'/%3E%3C/svg%3E");
+          mask:center/15px no-repeat url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M20 2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h4l4 4 4-4h4a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2z'/%3E%3C/svg%3E");
+}
+
+/* =========================================================
+   라이트박스
+   ========================================================= */
+.lb{
+  position:fixed;inset:0;z-index:90;
+  background:rgba(28,25,26,.95);
+  display:flex;align-items:center;justify-content:center;
+  animation:fade .25s var(--ease);
+}
+.lb__img{
+  max-width:92vw;max-height:78vh;
+  object-fit:contain;
+  user-select:none;
+  -webkit-user-drag:none;
+}
+.lb__x{
+  position:absolute;top:calc(14px + env(safe-area-inset-top));right:14px;
+  width:40px;height:40px;z-index:2;
+}
+.lb__x::before,.lb__x::after{
+  content:'';position:absolute;top:50%;left:11px;
+  width:18px;height:1px;background:#fff;
+}
+.lb__x::before{transform:rotate(45deg);}
+.lb__x::after{transform:rotate(-45deg);}
+.lb__nav{
+  position:absolute;top:50%;transform:translateY(-50%);
+  width:46px;height:46px;
+}
+.lb__nav::before{
+  content:'';position:absolute;top:50%;left:50%;
+  width:11px;height:11px;
+  border-top:1.4px solid #fff;border-right:1.4px solid #fff;
+}
+.lb__nav--prev{left:4px;}
+.lb__nav--prev::before{transform:translate(-30%,-50%) rotate(-135deg);}
+.lb__nav--next{right:4px;}
+.lb__nav--next::before{transform:translate(-70%,-50%) rotate(45deg);}
+.lb__count{
+  position:absolute;bottom:38px;left:0;right:0;
+  text-align:center;
+  font-family:var(--font-sm);
+  font-size:13px;letter-spacing:.2em;color:rgba(255,255,255,.75);
+}
+
+/* =========================================================
+   토스트
+   ========================================================= */
+.toast{
+  position:fixed;left:50%;bottom:40px;
+  transform:translate(-50%,16px);
+  z-index:100;
+  background:rgba(46,42,43,.92);
+  color:#fff;
+  font-family:var(--font-kr-sans);
+  font-size:13.5px;
+  padding:12px 20px;
+  border-radius:999px;
+  opacity:0;pointer-events:none;
+  transition:opacity .3s var(--ease), transform .3s var(--ease);
+  white-space:nowrap;
+}
+.toast.on{opacity:1;transform:translate(-50%,0);}
+
+/* ---------- 작은 화면 ---------- */
+@media (max-width:360px){
+  :root{--pad:22px;}
+  .sec{padding:70px var(--pad);}
+  .dday__clock b{font-size:21px;}
+}
