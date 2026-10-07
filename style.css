@@ -477,6 +477,7 @@ h1,h2,p,figure{margin:0;}
   box-shadow:0 6px 18px rgba(238,87,132,.22);
 }
 .btn--solid:active{transform:translateY(1px);}
+.btn--solid:disabled{opacity:.55;cursor:default;}
 .btn--sm{height:40px;padding:0 20px;font-size:13px;margin-top:22px;}
 
 /* 버튼 안 아이콘 — 색은 버튼 글자색을 따라감(눌렀을 때 흰색으로 반전) */
@@ -789,8 +790,16 @@ h1,h2,p,figure{margin:0;}
   background:var(--white);
   box-shadow:0 10px 30px rgba(46,42,43,.06);
 }
-.map__embed iframe{
-  display:block;width:100%;height:240px;border:0;filter:saturate(.9);
+.map__canvas{width:100%;height:240px;}
+.map__pin{
+  display:block;overflow:visible;cursor:pointer;
+  filter:drop-shadow(0 3px 5px rgba(46,42,43,.25));
+}
+.map__pin path{fill:var(--pink);stroke:#fff;stroke-width:1.6;}
+.map__pin circle{fill:#fff;}
+.map__fallback{
+  display:flex;align-items:center;justify-content:center;height:100%;
+  font-size:14px;color:var(--pink);text-decoration:underline;text-underline-offset:3px;
 }
 .map__apps{display:flex;gap:7px;margin-top:12px;}
 
