@@ -428,20 +428,34 @@
       }
     });
 
-    /* 모바일 정책상 자동재생이 막히므로, 첫 터치/스크롤에 한 번 시도 */
-    function firstGesture() {
-      if (!armed) {
+    /* 들어오자마자 재생 시도 — 브라우저가 막으면 첫 터치/클릭/키 입력 때 다시 시도 */
+    var gestures = ["pointerdown", "touchend", "click", "keydown"];
+    function firstGesture(e) {
+      // 음표 버튼을 누른 경우는 버튼 클릭 처리에 맡김
+      if (!armed && !(e && btn.contains(e.target))) {
         armed = true;
         play();
       }
-      window.removeEventListener("touchstart", firstGesture);
-      window.removeEventListener("click", firstGesture);
+      if (armed) {
+        gestures.forEach(function (t) {
+          window.removeEventListener(t, firstGesture, true);
+        });
+      }
     }
-    window.addEventListener("touchstart", firstGesture, {
-      once: true,
-      passive: true,
+    gestures.forEach(function (t) {
+      window.addEventListener(t, firstGesture, { capture: true, passive: true });
     });
-    window.addEventListener("click", firstGesture, { once: true });
+
+    var p0 = audio.play();
+    if (p0 && p0.then) {
+      p0.then(function () {
+        armed = true;
+        setState(true);
+        firstGesture();
+      }).catch(function () {
+        setState(false);
+      });
+    }
 
     audio.addEventListener("error", function () {
       setState(false);
