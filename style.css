@@ -1240,6 +1240,8 @@ figure {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 8px;
+  margin-top: 100px;
+  margin-right: 22%;
 }
 
 /* 엇갈려 내려오는 두 장 — 오른쪽 먼저, 왼쪽이 아래로 겹쳐 내려옴 */
@@ -1251,11 +1253,14 @@ figure {
   width: 54%;
 }
 .gal__stagger .gal__r {
+  width: 38%;
   margin-left: auto;
+  margin-right: 6%;
 }
 .gal__stagger .gal__l {
+  width: 38%;
   margin-top: -30%;
-  margin-left: 4%;
+  margin-left: 6%;
 }
 
 /* 작은 한 장 — 오른쪽으로 비켜서 */
@@ -1274,6 +1279,10 @@ figure {
   position: relative;
   margin-top: 64px;
 }
+/* 바다 첫 장(10번) — 위 여백 넓게 */
+.gal__hero.gal__hero--sea {
+  margin-top: 150px;
+}
 .gal__hero .gal__f {
   width: 58%;
 }
@@ -1282,7 +1291,7 @@ figure {
   margin-top: 10px;
 }
 .gal__hero--low .gal__f {
-  aspect-ratio: 3/2;
+  aspect-ratio: 1/1;
 }
 .gal__hero--low img {
   object-position: 50% 60%;
@@ -1303,6 +1312,17 @@ figure {
 .gal__stack .gal__f {
   width: 52%;
   margin: 0 auto 10px;
+}
+
+/* 한 장만 확대 — 낙서가 잘리지 않게 사진만 안쪽에서 자름 */
+.gal__crop {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.gal__zoom img {
+  transform: scale(1.85);
+  transform-origin: 50% 70%;
 }
 
 /* ---- 손그림 낙서 ---- */
