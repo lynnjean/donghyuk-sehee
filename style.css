@@ -22,23 +22,10 @@
 
 /* ---------------------------------------------------------
    상단 캡션 폰트 — fonts/ 폴더에 아래 파일명으로 넣으면 적용됩니다.
-   Widescreen VF (Weight Mixed) : Widescreen-VF.woff2 / .ttf
-   SD 노벰버 (산돌)              : SDNovember-Regular.woff2 / .otf / .ttf
    210 눈꽃                      : 210Nunkkot.woff2 / .otf / .ttf
    SD 잔 (산돌)                  : SDJan-Regular.woff2 / .otf / .ttf
-   파일이 없으면 Archivo / Gowun Dodum 으로 표시됩니다.
+   파일이 없으면 Cormorant Garamond / Gowun Batang 으로 표시됩니다.
    --------------------------------------------------------- */
-@font-face {
-  font-family: "Widescreen";
-  src:
-    local("Widescreen VF"),
-    local("Widescreen"),
-    url("fonts/Widescreen-VF.woff2") format("woff2"),
-    url("fonts/Widescreen-VF.ttf") format("truetype");
-  font-weight: 100 900;
-  font-style: normal;
-  font-display: swap;
-}
 @font-face {
   font-family: "210 Nunkkot";
   src:
@@ -62,19 +49,6 @@
     url("fonts/SDJan-Regular.woff2") format("woff2"),
     url("fonts/SDJan-Regular.otf") format("opentype"),
     url("fonts/SDJan-Regular.ttf") format("truetype");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "SD November";
-  src:
-    local("SD November"),
-    local("SDNovember"),
-    local("SDNovember-Regular"),
-    url("fonts/SDNovember-Regular.woff2") format("woff2"),
-    url("fonts/SDNovember-Regular.otf") format("opentype"),
-    url("fonts/SDNovember-Regular.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -1193,7 +1167,7 @@ figure {
 .m2 {
   grid-column: 4/7;
   grid-row: 2/4;
-  aspect-ratio: 3/2;
+  aspect-ratio: 4/3;
 }
 .m3 {
   grid-column: 2/5;
@@ -1206,15 +1180,15 @@ figure {
   aspect-ratio: 1/1;
 }
 .m5 {
-  /* 6번 자리까지 넓혀 크게 보여주는 가로 컷 */
-  grid-column: 1/7;
+  grid-column: 1/4;
   grid-row: 7/10;
-  aspect-ratio: 3/2;
+  aspect-ratio: 2/3;
 }
 .m6 {
-  grid-column: 3/6;
-  grid-row: 8/10;
-  aspect-ratio: 3/2;
+  /* 5번 옆에 나란히 */
+  grid-column: 4/7;
+  grid-row: 7/10;
+  aspect-ratio: 2/3;
 }
 
 /* 세로 사진을 정사각·가로 칸에 넣을 때 인물이 보이도록 위치 보정 */
@@ -1346,6 +1320,25 @@ figure {
   top: 22%;
   width: 34px;
 }
+/* 위쪽 모자이크(1~6번) 여백 낙서 */
+.gd--mo1 {
+  position: absolute;
+  right: 38%;
+  top: 3.6%;
+  width: 40px;
+}
+.gd--mo2 {
+  position: absolute;
+  right: 6%;
+  top: 40.6%;
+  width: 32px;
+}
+.gd.gd--mo3 {
+  position: absolute;
+  right: 17%;
+  top: 46.5%;
+  width: 22px;
+}
 .gd--f1 {
   width: 38px;
   margin: 18px 0 0 14%;
@@ -1399,7 +1392,7 @@ figure {
   align-items: baseline;
   gap: 10px;
   margin: 56px 0 18px;
-  font-family: "Archivo", sans-serif;
+  font-family: "DM Sans", sans-serif;
   font-weight: 800;
   font-size: calc(var(--gw, 404px) * 0.056);
   letter-spacing: -0.02em;
@@ -1442,11 +1435,11 @@ figure {
   z-index: 1;
 }
 
-/* JUST / MARRIED — 우상단, 오른쪽으로 흘러넘치게 */
+/* Our / Forever — 우상단, 오른쪽으로 흘러넘치게 */
 .gw--just {
   left: 51%;
   top: 3%;
-  font-family: "Archivo", sans-serif;
+  font-family: "DM Sans", sans-serif;
   font-weight: 800;
   font-size: calc(var(--gw) * 0.101);
   line-height: 0.95;
@@ -1470,26 +1463,26 @@ figure {
 }
 
 /* WEDDING DAY — 좌측 좁은 여백에 세로쓰기 */
+/* 3번 사진 왼쪽 위에 붙여서 — 1칸 폭 = (100% - 간격 5개) / 6 */
 .gw--vert {
-  left: 1.5%;
-  top: 37%;
+  right: calc(100% - (100% - 35px) / 6 - 7px + 5px);
+  top: 34.8%;
   writing-mode: vertical-rl;
-  font-family: "Archivo", sans-serif;
-  font-weight: 700;
-  font-size: calc(var(--gw) * 0.026);
+  font-family: var(--font-sm); /* 2027. 01. 09 와 같은 글씨·크기 */
+  font-size: calc(var(--gw) * 0.032);
   letter-spacing: 0.3em;
   color: var(--pink-sb);
 }
 
-/* JEJU ISLAND WEDDING — m3 오른쪽 여백 */
+/* IN JEJU ISLAND — m3 오른쪽 여백, 2번 사진 바로 아래에 붙여서 */
 .gw--jeju {
   left: 69%;
-  top: 37.5%;
+  top: 34.9%;
   color: var(--pink);
 }
 .gw--jeju b {
   display: block;
-  font-family: "Archivo", sans-serif;
+  font-family: "DM Sans", sans-serif;
   font-weight: 800;
   font-size: calc(var(--gw) * 0.098);
   line-height: 0.9;
@@ -1497,9 +1490,9 @@ figure {
 }
 .gw--jeju span {
   display: block;
-  margin-top: 7px;
-  font-family: var(--font-sm);
-  font-size: calc(var(--gw) * 0.024);
+  margin-top: 0;
+  font-family: var(--font-sm); /* 2027. 01. 09 와 같은 글씨·크기 */
+  font-size: calc(var(--gw) * 0.032);
   letter-spacing: 0.22em;
   color: var(--ink-3);
 }
@@ -1822,6 +1815,44 @@ figure {
   color: var(--pink);
   transition: opacity 0.2s;
 }
+/* 맨 위로 버튼 — 음악 버튼과 같은 모양, 오른쪽 아래 */
+.top-btn {
+  position: fixed;
+  bottom: 20px;
+  right: max(16px, calc(50vw - 230px + 16px));
+  z-index: 60;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 2px 10px rgba(46, 42, 43, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition:
+    opacity 0.3s,
+    transform 0.3s,
+    visibility 0.3s;
+}
+.top-btn.is-show {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+/* 공유 버튼 — 맨 위로 버튼 바로 위 */
+.share-btn {
+  bottom: 68px;
+}
+.top-btn__ico {
+  width: 18px;
+  height: 18px;
+  color: var(--pink);
+}
+
 /* 재생 중 — 음표가 살짝 흔들림 */
 .bgm-btn[aria-pressed="true"] .bgm-ico {
   animation: note 1.6s ease-in-out infinite;

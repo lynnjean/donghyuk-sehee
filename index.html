@@ -19,7 +19,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800&family=Caveat+Brush&family=DM+Sans:wght@400;500&family=Pacifico&family=Gaegu:wght@400;700&family=Gowun+Batang:wght@400;700&family=Gowun+Dodum&family=Parisienne&family=Cormorant+Garamond:wght@300;400;500;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&family=Gowun+Batang:wght@400;700&family=Gowun+Dodum&family=Cormorant+Garamond:wght@300;400;500;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
@@ -50,6 +50,44 @@
       </svg>
     </button>
     <audio id="bgm" loop preload="auto" src="audio/bgm-jjanjanhan.mp3"></audio>
+
+    <!-- ===== 공유 (맨 위로 버튼 위, 함께 나타남) ===== -->
+    <button class="top-btn share-btn" id="shareBtn" type="button" aria-label="청첩장 공유하기">
+      <!-- Heroicons (Tailwind) · share / outline -->
+      <svg
+        class="top-btn__ico"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.5"
+        aria-hidden="true"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M7.217 10.907a2.25 2.25 0 1 0 0 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186 9.566-5.314m-9.566 7.5 9.566 5.314m0 0a2.25 2.25 0 1 0 3.935 2.186 2.25 2.25 0 0 0-3.935-2.186Zm0-12.814a2.25 2.25 0 1 0 3.933-2.185 2.25 2.25 0 0 0-3.933 2.185Z"
+        />
+      </svg>
+    </button>
+
+    <!-- ===== 맨 위로 (WEDDING DAY 섹션부터 나타남) ===== -->
+    <button class="top-btn" id="topBtn" type="button" aria-label="맨 위로 이동">
+      <!-- Heroicons (Tailwind) · arrow-up / outline -->
+      <svg
+        class="top-btn__ico"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.5"
+        aria-hidden="true"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18"
+        />
+      </svg>
+    </button>
 
     <main class="wrap">
       <!-- ===== 1. HERO ===== -->
@@ -209,43 +247,62 @@
               loading="lazy"
             />
           </figure>
+          <figure class="mosaic__item m6 reveal" data-idx="5">
+            <span class="mosaic__no">( 6 )</span>
+            <img
+              src="images/gallery/RM3_9300_film.jpg"
+              alt="웨딩 스냅 6"
+              loading="lazy"
+            />
+          </figure>
 
           <!-- 여백을 채우는 웨딩 타이포 (장식용) -->
-          <p class="gw gw--just reveal" aria-hidden="true">
-            <span>January</span><span>9th</span>
-          </p>
           <p class="gw gw--date reveal" aria-hidden="true">2027. 01. 09</p>
           <p class="gw gw--vert reveal" aria-hidden="true">WEDDING DAY</p>
           <p class="gw gw--jeju reveal" aria-hidden="true">
-            <b>JEJU</b><span>ISLAND WEDDING</span>
+            <span>IN JEJU ISLAND</span>
           </p>
+
+          <!-- 여백 낙서 (장식용) -->
+          <svg class="gd gd--flower gd--mo1" viewBox="-22 -22 44 44" aria-hidden="true">
+            <g><ellipse cx="0" cy="-10" rx="6.5" ry="9.5" /><ellipse cx="0" cy="-10" rx="6.5" ry="9.5" transform="rotate(72)" /><ellipse cx="0" cy="-10" rx="6.5" ry="9.5" transform="rotate(144)" /><ellipse cx="0" cy="-10" rx="6.5" ry="9.5" transform="rotate(216)" /><ellipse cx="0" cy="-10" rx="6.5" ry="9.5" transform="rotate(288)" /><circle r="2.4" /></g>
+          </svg>
+          <svg class="gd gd--flower gd--mo2" viewBox="-22 -22 44 44" aria-hidden="true">
+            <g><ellipse cx="0" cy="-10" rx="6.5" ry="9.5" /><ellipse cx="0" cy="-10" rx="6.5" ry="9.5" transform="rotate(72)" /><ellipse cx="0" cy="-10" rx="6.5" ry="9.5" transform="rotate(144)" /><ellipse cx="0" cy="-10" rx="6.5" ry="9.5" transform="rotate(216)" /><ellipse cx="0" cy="-10" rx="6.5" ry="9.5" transform="rotate(288)" /><circle r="2.4" /></g>
+          </svg>
+          <svg class="gd gd--leaf gd--mo3" viewBox="0 0 24 12" aria-hidden="true">
+            <path d="M1 4 C7 0 18 1 23 6 C19 10 13 8 10 6 C7 5 4 5 1 4 Z" />
+          </svg>
         </div>
 
         <!-- 모자이크 아래 — 여백을 살린 에디토리얼 배치 + 손그림 낙서
              캐주얼(6~9) · 바다·항구(10~15) / 라이트박스에서 함께 넘겨 볼 수 있음 -->
         <div class="gallery-more gal">
           <div class="gal__pair">
-            <figure class="mosaic__item gal__f reveal" data-idx="5">
+            <figure class="mosaic__item gal__f reveal" data-idx="6">
+              <span class="mosaic__no">( 7 )</span>
               <img
                 src="images/gallery/RM3_1355.jpg"
-                alt="웨딩 스냅 6"
+                alt="웨딩 스냅 7"
                 loading="lazy"
               />
             </figure>
-            <figure class="mosaic__item gal__f reveal" data-idx="6">
+            <figure class="mosaic__item gal__f reveal" data-idx="7">
+              <span class="mosaic__no">( 8 )</span>
               <img
                 src="images/gallery/RM3_1291.jpg"
-                alt="웨딩 스냅 7"
+                alt="웨딩 스냅 8"
                 loading="lazy"
               />
             </figure>
           </div>
 
           <div class="gal__stagger">
-            <figure class="mosaic__item gal__f gal__r reveal" data-idx="7">
+            <figure class="mosaic__item gal__f gal__r reveal" data-idx="8">
+              <span class="mosaic__no">( 9 )</span>
               <img
                 src="images/gallery/RM3_1629.jpg"
-                alt="웨딩 스냅 8"
+                alt="웨딩 스냅 9"
                 loading="lazy"
               />
             </figure>
@@ -254,10 +311,11 @@
                 d="M3 27 C6 14 18 3 30 4 C40 5 37 17 25 19 C17 20 11 16 13 11"
               />
             </svg>
-            <figure class="mosaic__item gal__f gal__l reveal" data-idx="8">
+            <figure class="mosaic__item gal__f gal__l reveal" data-idx="9">
+              <span class="mosaic__no">( 10 )</span>
               <img
                 src="images/gallery/RM3_1477.jpg"
-                alt="웨딩 스냅 9"
+                alt="웨딩 스냅 10"
                 loading="lazy"
               />
             </figure>
@@ -302,19 +360,19 @@
                 <circle r="2.4" />
               </g>
             </svg>
-            <figure class="mosaic__item gal__f reveal" data-idx="9">
+            <figure class="mosaic__item gal__f reveal" data-idx="10">
               <img
                 src="images/gallery/RM3_2299.jpg"
-                alt="웨딩 스냅 10"
+                alt="웨딩 스냅 11"
                 loading="lazy"
               />
             </figure>
           </div>
           <div class="gal__hero gal__hero--low">
-            <figure class="mosaic__item gal__f reveal" data-idx="10">
+            <figure class="mosaic__item gal__f reveal" data-idx="11">
               <img
                 src="images/gallery/RM3_2643.jpg"
-                alt="웨딩 스냅 11"
+                alt="웨딩 스냅 12"
                 loading="lazy"
               />
             </figure>
@@ -402,10 +460,10 @@
           </div>
 
           <div class="gal__detail">
-            <figure class="mosaic__item gal__f reveal" data-idx="11">
+            <figure class="mosaic__item gal__f reveal" data-idx="12">
               <img
                 src="images/gallery/RM3_0352.jpg"
-                alt="웨딩 스냅 12"
+                alt="웨딩 스냅 13"
                 loading="lazy"
               />
             </figure>
@@ -450,10 +508,10 @@
           </svg>
 
           <div class="gal__stack">
-            <figure class="mosaic__item gal__f reveal" data-idx="12">
+            <figure class="mosaic__item gal__f reveal" data-idx="13">
               <img
                 src="images/gallery/RM3_0221.jpg"
-                alt="웨딩 스냅 13"
+                alt="웨딩 스냅 14"
                 loading="lazy"
               />
               <svg class="gd gd--birds" viewBox="0 0 120 50" aria-hidden="true">
@@ -465,18 +523,18 @@
                 />
               </svg>
             </figure>
-            <figure class="mosaic__item gal__f reveal" data-idx="13">
+            <figure class="mosaic__item gal__f reveal" data-idx="14">
               <img
                 src="images/gallery/RM3_0142.jpg"
-                alt="웨딩 스냅 14"
+                alt="웨딩 스냅 15"
                 loading="lazy"
               />
             </figure>
-            <figure class="mosaic__item gal__f gal__zoom reveal" data-idx="14">
+            <figure class="mosaic__item gal__f gal__zoom reveal" data-idx="15">
               <div class="gal__crop">
                 <img
                   src="images/gallery/RM3_0646_film.jpg"
-                  alt="웨딩 스냅 15"
+                  alt="웨딩 스냅 16"
                   loading="lazy"
                 />
               </div>

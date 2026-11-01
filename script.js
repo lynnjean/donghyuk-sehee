@@ -250,32 +250,33 @@
     });
   });
 
-  /* 링크 복사 / 공유 */
-  var shareBtn = $("#shareLink");
-  if (shareBtn) {
-    shareBtn.addEventListener("click", function () {
-      var url = location.href;
-      if (navigator.share) {
-        navigator
-          .share({
-            title: "강동혁 ♥ 김세희 결혼합니다",
-            text: "2027년 1월 9일 토요일 오전 11시, 애플컨벤션",
-            url: url,
-          })
-          .catch(function () {
-            /* 사용자가 취소 */
-          });
-        return;
-      }
-      copyText(url)
-        .then(function () {
-          toast("청첩장 링크가 복사되었습니다.");
+  /* 링크 복사 / 공유 — 공유 시트가 있으면 사용, 없으면 링크 복사 */
+  function shareInvite() {
+    var url = location.href;
+    if (navigator.share) {
+      navigator
+        .share({
+          title: "강동혁 ♥ 김세희 결혼합니다",
+          text: "2027년 1월 9일 토요일 오전 11시, 애플컨벤션",
+          url: url,
         })
         .catch(function () {
-          toast("링크 복사에 실패했습니다.");
+          /* 사용자가 취소 */
         });
-    });
+      return;
+    }
+    copyText(url)
+      .then(function () {
+        toast("청첩장 링크가 복사되었습니다.");
+      })
+      .catch(function () {
+        toast("링크 복사에 실패했습니다.");
+      });
   }
+  ["#shareLink", "#shareBtn"].forEach(function (sel) {
+    var el = $(sel);
+    if (el) el.addEventListener("click", shareInvite);
+  });
 
   /* =======================================================
      하단 시트 (연락처)
@@ -629,5 +630,28 @@
         list.innerHTML =
           '<li class="gb__empty">메시지를 불러오지 못했습니다.<br>잠시 후 다시 시도해 주세요.</li>';
       });
+  })();
+
+  /* =======================================================
+     맨 위로 — WEDDING DAY 섹션부터 버튼이 나타남
+     ======================================================= */
+  (function toTop() {
+    var btn = $("#topBtn"),
+      share = $("#shareBtn"),
+      start = $(".sec--date"); // WEDDING DAY 섹션부터 표시 (공유 버튼도 함께)
+    if (!btn || !start) return;
+
+    function update() {
+      var reached = start.getBoundingClientRect().top <= window.innerHeight * 0.5;
+      btn.classList.toggle("is-show", reached);
+      if (share) share.classList.toggle("is-show", reached);
+    }
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    update();
+
+    btn.addEventListener("click", function () {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
   })();
 })();
