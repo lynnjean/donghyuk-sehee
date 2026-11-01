@@ -174,7 +174,9 @@ figure {
   position: relative;
   max-width: 460px;
   margin: 0 auto;
-  aspect-ratio: 2/3;
+  /* 모바일 첫 화면을 카드만으로 꽉 채움 */
+  min-height: 100vh;
+  min-height: 100svh;
   display: flex;
   align-items: center;
   justify-content: center;
